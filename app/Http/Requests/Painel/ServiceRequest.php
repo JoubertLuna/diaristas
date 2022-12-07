@@ -32,7 +32,7 @@ class ServiceRequest extends FormRequest
       'posicao' => 'required|integer|min:1|max:99',
       'valor_minimo' => "required|numeric|regex:/^\d+(\.\d{1,2})?$/",
       'quantidade_horas' => 'required|integer|min:1|max:8',
-      'porcentagem' => 'required|numeric|min:1|max:99',
+      'porcentagem' => 'required|integer|min:1|max:99',
       'valor_quarto' => "required|numeric|regex:/^\d+(\.\d{1,2})?$/",
       'horas_quarto' => 'required|integer|min:1|max:8',
       'valor_sala' => "required|numeric|regex:/^\d+(\.\d{1,2})?$/",
@@ -46,5 +46,29 @@ class ServiceRequest extends FormRequest
       'valor_outros' => "required|numeric|regex:/^\d+(\.\d{1,2})?$/",
       'horas_outros'  => 'required|integer|min:1|max:8'
     ];
+  }
+
+  public function validationData()
+  {
+    $dados = $this->all();
+
+    $dados['valor_minimo'] = $this->formataValorMonetario($dados['valor_minimo']);
+    $dados['valor_quarto'] = $this->formataValorMonetario($dados['valor_quarto']);
+    $dados['valor_sala'] = $this->formataValorMonetario($dados['valor_sala']);
+    $dados['valor_cozinha'] = $this->formataValorMonetario($dados['valor_cozinha']);
+    $dados['valor_banheiro'] = $this->formataValorMonetario($dados['valor_banheiro']);
+    $dados['valor_quintal'] = $this->formataValorMonetario($dados['valor_quintal']);
+    $dados['valor_outros'] = $this->formataValorMonetario($dados['valor_outros']);
+
+    $this->replace($dados);
+    return $dados;
+  }
+
+  /**
+   * formatação dos valores monetários
+   */
+  protected function formataValorMonetario(string $valor)
+  {
+    return str_replace(['.', ','], ['', '.'], $valor);
   }
 }

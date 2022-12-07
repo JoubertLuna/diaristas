@@ -15,7 +15,7 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>Id</th>
+                            <th>imagem</th>
                             <th>Nome</th>
                             <th>E-mail</th>
                             <th>Data de Cadastro</th>
@@ -26,7 +26,20 @@
                     <tbody class="table-border-bottom-0">
                         @forelse ($users as $user)
                             <tr>
-                                <td>{{ $user->id }}</td>
+                                <td>
+                                    <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
+                                        <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
+                                            class="avatar avatar-xs pull-up" title="{{ $user->name }}">
+                                            @if ($user->image)
+                                                <img src="{{ asset('storage/users/' . $user->image) }}"
+                                                    alt="{{ $user->name }}" class="rounded-circle">
+                                            @else
+                                                <img src="{{ asset('storage/users/semperfil.jpg') }}"
+                                                    alt="{{ $user->name }}" class="rounded-circle">
+                                            @endif
+                                        </li>
+                                    </ul>
+                                </td>
                                 <td>{{ $user->name }}</td>
                                 <td>{{ $user->email }}</td>
                                 <td>{{ $user->created_at }}</td>

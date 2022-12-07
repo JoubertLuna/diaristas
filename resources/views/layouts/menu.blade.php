@@ -45,7 +45,7 @@
                     </g>
                 </svg>
             </span>
-            <span class="app-brand-text demo menu-text fw-bolder ms-2">Diaristas</span>
+            <span class="app-brand-text demo menu-text fw-bolder ms-2">{{ config('app.name', 'Laravel') }}</span>
         </a>
 
         <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
@@ -66,22 +66,16 @@
             </a>
         </li>
         <li class="menu-item">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-              <i class="fa-solid fa-users"></i>
-                 <div data-i18n="Form Layouts"> Usuários</div>
+            <a href="{{ route('user.index') }}" class="menu-link">
+                <i class="fa-solid fa-users"></i>
+                <div data-i18n="Boxicons"> Usuários</div>
             </a>
-            <ul class="menu-sub">
-                <li class="menu-item">
-                    <a href="{{ route('user.index') }}" class="menu-link">
-                        <div data-i18n="Vertical Form">Cadastrar Usuários</div>
-                    </a>
-                </li>
-                <li class="menu-item">
-                  <a href="{{ route('home') }}" class="menu-link">
-                      <div data-i18n="Vertical Form">Cadastro de Empresa</div>
-                  </a>
-              </li>
-            </ul>
+        </li>
+        <li class="menu-item">
+            <a href="{{ route('home') }}" class="menu-link">
+                <i class="fa-sharp fa-solid fa-building"></i>
+                <div data-i18n="Boxicons"> Cadastro de Empresa</div>
+            </a>
         </li>
     </ul>
 </aside>
